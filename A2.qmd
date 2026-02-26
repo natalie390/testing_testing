@@ -1,0 +1,56 @@
+---
+title: "A2"
+author: "Natalie Olson"
+format: 
+  html:
+    embed-resources: true
+---
+
+## Loading Data
+
+...
+
+```{r}
+# Code to load grade distribution data files:
+
+# Data originally from reddit user austingwalters in this reddit thread: https://www.reddit.com/r/udub/comments/4e6kxl/i_made_a_website_that_shows_grade_distributions/
+# Dataset and 2016 FOIA request info from their dropbox: https://www.dropbox.com/scl/fo/8lbyazjlt5jmv86jvvs06/AGtgMaWeyZtZuS2fSYLYn_4?dl=0&e=1&rlkey=1sg7t372nhslxogwjl3e9lt9t
+
+biol_grades_df <- read.csv("https://raw.githubusercontent.com/kylethayer/Info-201-au-24-datasets/refs/heads/main/BIOL_grades_2016.csv")
+design_grades_df <- read.csv("https://raw.githubusercontent.com/kylethayer/Info-201-au-24-datasets/refs/heads/main/DESIGN_grades_2016.csv")
+```
+
+## Program Summaries
+
+**BIOL and DESIGN**
+
+```{r}
+library(dplyr)
+total_records_biol <- nrow(biol_grades_df)
+total_records_design <- nrow(design_grades_df)
+student_count_biol <- biol_grades_df |> pull(Student_Count)
+mean_count_biol <- mean(student_count_biol, na.rm = TRUE)
+student_count_design <- design_grades_df |> pull(Student_Count)
+mean_count_design <- mean(student_count_design, na.rm = TRUE)
+sum_count_biol <- sum(student_count_biol, na.rm = TRUE)
+sum_count_design <- sum(student_count_design, na.rm = TRUE)
+
+avg_grade_biol <- biol_grades_df |> pull(Average_GPA)
+avg_grade_design <- design_grades_df |> pull(Average_GPA)
+min_biol <- min(avg_grade_biol, na.rm = TRUE)
+max_biol <- max(avg_grade_biol, na.rm = TRUE)
+mean_grade_biol <- mean(avg_grade_biol, na.rm = TRUE)
+min_design <- min(avg_grade_design, na.rm = TRUE)
+max_design <- max(avg_grade_design, na.rm = TRUE)
+mean_grade_design <- mean(avg_grade_design, na.rm = TRUE)
+```
+
+Notable numbers between the two program datasets: a- The total number of class records for the biology dataset is 816 and the total for design is 159. There are significantly more records for biology than design. b- The averages (taken by calculating the mean) of student count per course are also particularly different with the mean student count for biology being approximately 81.78 and that for design being approximately 30.59. c- The sum for student count for biology courses is 66,733 while the sum for that of design is 4,862. d, e, f- Lastly, there are three numbers to look at related to grades. The minimum average grades are 2.1 (biology) and 2.9 (design). The maximum average grades for both programs are 4. Then, the mean average GPA for biology is approximately 3.15 while for design it is approximately 3.45.
+
+## Compare Programs
+
+From the numbers found and shared above, it is clear that biology is a larger program than design as there is a greater number of courses and total students involved in the program than design. It can also be gathered that design courses are smaller, maybe less likely to be large lecture-style courses, since the mean student count for design is significantly lower than for biology. The data on average GPA shows that biology may be a program in which it is more difficult to receive higher grades.
+
+## Two New Questions
+
+What is the maximum and minimum student count for courses for each program? Which courses occur most throughout the year for each program and what are the average grades for those courses?
